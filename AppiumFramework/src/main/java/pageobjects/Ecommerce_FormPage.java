@@ -6,13 +6,17 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import utilities.gestures.Scrollutility;
 
 public class Ecommerce_FormPage {
 	
-
+	AndroidDriver driver;
+	Scrollutility slu;
 	public Ecommerce_FormPage(AndroidDriver<AndroidElement> driver) {
 		// TODO Auto-generated constructor stub
 		PageFactory.initElements(new AppiumFieldDecorator(driver), this);
+		this.driver = driver;
+		slu = new Scrollutility(driver);
 	}
 	
 	final String nameFieldId = "com.androidsample.generalstore:id/nameField";
@@ -20,6 +24,7 @@ public class Ecommerce_FormPage {
 	final String countryDDId = "com.androidsample.generalstore:id/spinnerCountry";
 	final String countryScrollTo = "new UiScrollable(new UiSelector()).scrollIntoView(text(\"Aruba\"));";
 	final String submitBtnXpath = "//android.widget.Button[@text=\"Let's  Shop\"]";
+	
 	
 	
 	@AndroidFindBy(id = nameFieldId)
@@ -37,7 +42,7 @@ public class Ecommerce_FormPage {
 	@AndroidFindBy(xpath = submitBtnXpath)
 	public AndroidElement submitBtn;
 
-	public void enterName(AndroidDriver<AndroidElement> driver,String name) {
+	public void enterName(String name) {
 		// TODO Auto-generated method stub
 		System.out.println("Trying to get name field");
 		AndroidElement ae = nameFieldTB;
@@ -46,6 +51,12 @@ public class Ecommerce_FormPage {
 		System.out.println("Hiding keyboard");
 		driver.hideKeyboard();
 		
+	}
+
+	public AndroidElement scrollToCountry(String country) {
+		// TODO Auto-generated method stub
+		AndroidElement ae = (AndroidElement) slu.scrollToText(country);
+		return ae;
 	}
 	
 	

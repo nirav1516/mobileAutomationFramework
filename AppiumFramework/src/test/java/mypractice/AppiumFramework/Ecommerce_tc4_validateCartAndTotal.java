@@ -34,7 +34,7 @@ public class Ecommerce_tc4_validateCartAndTotal extends Setup{
 		
 		Ecommerce_FormPage eFP = new Ecommerce_FormPage(driver);
 		
-		eFP.enterName(driver,"Nirav");
+		eFP.enterName("Nirav");
 	
 		AndroidElement ae = eFP.genderFemaleCB;
 		ae.click();
@@ -42,7 +42,7 @@ public class Ecommerce_tc4_validateCartAndTotal extends Setup{
 		ae = eFP.countryDD;
 		ae.click();
 		
-		ae = eFP.countryToPick;
+		ae = eFP.scrollToCountry("Aruba");
 		//new UiScrollable(new UiSelector()).scrollIntoView(text(\"WebView\"));
 		//driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textMatches(\"" + containedText + "\").instance(0))")); 
 		ae.click();
