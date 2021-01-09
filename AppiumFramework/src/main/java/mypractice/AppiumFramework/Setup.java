@@ -31,8 +31,10 @@ public class Setup {
 			System.out.println("Appium  NOT running, trying to start...");
 			service = AppiumDriverLocalService.buildDefaultService();
 			service.start();
+		}else {
+			System.out.println("Appium already running. Not starting again.");
 		}
-		System.out.println("Appium already running. Not starting again.");
+		
 		
 	}
 	
@@ -53,7 +55,8 @@ public class Setup {
 		String serverPath = "http://127.0.0.1:4723/wd/hub";
 		URL serverURL = new URL(serverPath);
 		System.out.println("Chcking if device is an emulator:...............>> "+deviceName.toLowerCase().contains("emulator"));
-		
+		if(deviceName.toLowerCase().contains("emulator"))
+			startEmulator();
 		
 		DesiredCapabilities cap = new DesiredCapabilities();
 		cap.setCapability(MobileCapabilityType.DEVICE_NAME, prop.getProperty(deviceName));
@@ -72,9 +75,9 @@ public class Setup {
 		boolean isServiceRunning = false;
 	    ServerSocket socket;
 	    try {
-	      socket = new ServerSocket();
-	      socket.setReuseAddress(true);
-	      socket.bind(new InetSocketAddress("localhost", port));
+	      socket = new ServerSocket(port);
+	     // socket.setReuseAddress(true);
+	     // socket.bind(new InetSocketAddress("localhost", port));
 	      socket.close();
 	     
 	    } catch (IOException e) {
@@ -92,6 +95,14 @@ public class Setup {
 		prop.load(propertiFile);
 	}
 	
-
+	public static void startEmulator() throws IOException, InterruptedException {
+		String nameOfBatchFile = "startEmulator.bat";
+		//D:\AppiumLearnings\mobileAutomationFramework\AppiumFramework\src\main\java\\utilities\resources\startEmulator.bat
+		String pathToBatchFile = System.getProperty("user.dir") +"\\src\\main\\java\\utilities\\resources\\"+nameOfBatchFile;
+		Runtime.getRuntime().exec(pathToBatchFile);
+		Thread.sleep(8000);
+	}
+	
+	
 
 }
