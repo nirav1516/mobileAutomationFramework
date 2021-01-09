@@ -13,10 +13,11 @@ import io.appium.java_client.android.AndroidElement;
 public class Ecommerce_tc1 extends Setup{
 
 	@Test
-	public void testFormFill() throws IOException {
+	public void testFormFill() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
+		startService();
 		
-		AndroidDriver<AndroidElement> driver = capabilities("ECOMMERCE_TEST_APP","PIXEL_3A_8");
+		AndroidDriver<AndroidElement> driver = capabilities("ECOMMERCE_TEST_APP","EMULATOR_PIXEL_3A_8");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		AndroidElement ae = driver.findElementById("com.androidsample.generalstore:id/nameField");
@@ -37,7 +38,8 @@ public class Ecommerce_tc1 extends Setup{
 		ae = driver.findElementByXPath("//android.widget.Button[@text=\"Let's  Shop\"]");
 		ae.click();
 		Assert.assertTrue(true);
-		driver.quit();
+		//driver.quit();
+		stopService();
 		
 	}
 

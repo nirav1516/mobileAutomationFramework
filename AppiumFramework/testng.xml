@@ -5,6 +5,7 @@
     <classes>
       <class name="mypractice.AppiumFramework.Ecommerce_tc1"/>
       <class name="mypractice.AppiumFramework.Ecommerce_tc4_validateCartAndTotal"/>
+      <class name="mypractice.AppiumFramework.APIDemoBasicTest"/>
       
       
     </classes>

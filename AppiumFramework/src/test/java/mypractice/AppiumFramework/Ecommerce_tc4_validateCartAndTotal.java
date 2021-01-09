@@ -26,10 +26,11 @@ public class Ecommerce_tc4_validateCartAndTotal extends Setup{
 	float totalAmount = 0;
 
 	@Test
-	public void testValidationCart() throws IOException {
+	public void testValidationCart() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		
-		AndroidDriver<AndroidElement> driver = capabilities("ECOMMERCE_TEST_APP","PIXEL_3A_8");
+		startService();
+		AndroidDriver<AndroidElement> driver = capabilities("ECOMMERCE_TEST_APP","EMULATOR_PIXEL_3A_8");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		Ecommerce_FormPage eFP = new Ecommerce_FormPage(driver);
@@ -59,7 +60,7 @@ public class Ecommerce_tc4_validateCartAndTotal extends Setup{
 		System.out.println("Total so far: "+ev.totalAmount);
 		ev.validateItemsInCart(ae, driver);
 		ev.validateTotalAmountInCart(ae, driver);
-		
+		stopService();
 		
 		
 	}

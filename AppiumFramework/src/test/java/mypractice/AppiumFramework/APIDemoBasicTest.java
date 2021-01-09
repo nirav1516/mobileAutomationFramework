@@ -16,9 +16,10 @@ import pageobjects.PreferencePage;
 public class APIDemoBasicTest extends Setup{
 
 	@Test
-	public void testBasicApiDemo() throws IOException {
+	public void testBasicApiDemo() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		AndroidDriver<AndroidElement> driver = capabilities("DEMO_API_TEST_APP","PIXEL_3A_8");
+		startService();
+		AndroidDriver<AndroidElement> driver = capabilities("DEMO_API_TEST_APP","EMULATOR_PIXEL_3A_8");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
 		HomePage hP = new HomePage(driver);
@@ -47,6 +48,8 @@ public class APIDemoBasicTest extends Setup{
 		List<AndroidElement> eL = pDP.settingButtons;//driver.findElementsByClassName("android.widget.Button");
 		e = eL.get(1);
 		e.click();
+		
+		stopService();
 	}
 
 }
