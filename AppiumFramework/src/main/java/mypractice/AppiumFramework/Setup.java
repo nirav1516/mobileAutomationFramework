@@ -56,7 +56,7 @@ public class Setup {
 		URL serverURL = new URL(serverPath);
 		System.out.println("Chcking if device is an emulator:...............>> "+deviceName.toLowerCase().contains("emulator"));
 		if(deviceName.toLowerCase().contains("emulator"))
-			startEmulator();
+			startEmulator(prop.getProperty(deviceName));
 		
 		DesiredCapabilities cap = new DesiredCapabilities();
 		cap.setCapability(MobileCapabilityType.DEVICE_NAME, prop.getProperty(deviceName));
@@ -95,10 +95,12 @@ public class Setup {
 		prop.load(propertiFile);
 	}
 	
-	public static void startEmulator() throws IOException, InterruptedException {
+	public static void startEmulator(String emulatorName) throws IOException, InterruptedException {
 		String nameOfBatchFile = "startEmulator.bat";
 		//D:\AppiumLearnings\mobileAutomationFramework\AppiumFramework\src\main\java\\utilities\resources\startEmulator.bat
 		String pathToBatchFile = System.getProperty("user.dir") +"\\src\\main\\java\\utilities\\resources\\"+nameOfBatchFile;
+		if (!emulatorName.isBlank() && !emulatorName.isEmpty())
+			pathToBatchFile = pathToBatchFile +" "+emulatorName;
 		Runtime.getRuntime().exec(pathToBatchFile);
 		Thread.sleep(8000);
 	}
