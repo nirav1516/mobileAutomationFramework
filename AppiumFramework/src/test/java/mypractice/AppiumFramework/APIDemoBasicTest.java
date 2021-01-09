@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
@@ -14,17 +17,31 @@ import pageobjects.PreferenceDependenciesPage;
 import pageobjects.PreferencePage;
 
 public class APIDemoBasicTest extends Setup{
+	public static AndroidDriver<AndroidElement> driver;
+	static HomePage hP;
+	static PreferencePage pP;
+	static PreferenceDependenciesPage pDP;
+	
+	
+	
+	
+	@BeforeClass
+	public void setPreRequisite() throws IOException, InterruptedException {
+		System.err.println("APIDEMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+		killAllProcess();
+		startService();
+		driver = capabilities("DEMO_API_TEST_APP","EMULATOR_PIXEL_3A_8");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		hP = new HomePage(driver);
+		pP = new PreferencePage(driver);
+		pDP = new PreferenceDependenciesPage(driver);
+		
+	}
 
 	@Test
 	public void testBasicApiDemo() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		startService();
-		AndroidDriver<AndroidElement> driver = capabilities("DEMO_API_TEST_APP","EMULATOR_PIXEL_3A_8");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		HomePage hP = new HomePage(driver);
-		PreferencePage pP = new PreferencePage(driver);
-		PreferenceDependenciesPage pDP = new PreferenceDependenciesPage(driver);
+
 		
 		AndroidElement e;
 		hP.clickPreferenceMenu();

@@ -5,21 +5,33 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import pageobjects.HomePage;
+import pageobjects.PreferenceDependenciesPage;
+import pageobjects.PreferencePage;
 
 public class Ecommerce_tc1 extends Setup{
+	public static AndroidDriver<AndroidElement> driver;
+	
+	@BeforeClass
+	public void setPreRequisite() throws IOException, InterruptedException {
+		System.err.println("Ecome1111111111111111111111111111111111");
+		killAllProcess();
+		startService();
+		driver = capabilities("ECOMMERCE_TEST_APP","EMULATOR_PIXEL_3A_8");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+	}
 
 	@Test
 	public void testFormFill() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		startService();
-		
-		AndroidDriver<AndroidElement> driver = capabilities("ECOMMERCE_TEST_APP","EMULATOR_PIXEL_3A_8");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
 		AndroidElement ae = driver.findElementById("com.androidsample.generalstore:id/nameField");
 		ae.sendKeys("nirav");
 		driver.hideKeyboard();

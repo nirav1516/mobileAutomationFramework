@@ -38,6 +38,11 @@ public class Setup {
 		
 	}
 	
+	public void killAllProcess() throws IOException, InterruptedException {
+		Runtime.getRuntime().exec("taskkill /f /im node.exe");
+		Thread.sleep(3000);
+	}
+	
 	public void stopService() {
 		
 		if(service!=null)service.stop();
@@ -47,7 +52,7 @@ public class Setup {
 	
 	public static AndroidDriver<AndroidElement> capabilities(String appName, String deviceName) throws IOException, InterruptedException {
 		System.out.println("Setup.capabilities()");
-		System.err.println("Erorrrrrrrrrrrrrrrrrrrr");
+		//System.err.println("Erorrrrrrrrrrrrrrrrrrrr");
 		// TODO Auto-generated method stub
 		File srcPath = new File("src");
 		
@@ -71,6 +76,7 @@ public class Setup {
 		System.out.println("Awesome");
 	}
 	
+	//Check port prober implementation
 	public boolean checkIfServiceRunning(int port) {
 		boolean isServiceRunning = false;
 	    ServerSocket socket;

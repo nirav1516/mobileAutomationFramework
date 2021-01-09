@@ -12,6 +12,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.xml.sax.Locator;
 
@@ -20,20 +23,32 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import pageobjects.Ecommerce_FormPage;
+import pageobjects.HomePage;
+import pageobjects.PreferenceDependenciesPage;
+import pageobjects.PreferencePage;
 
 public class Ecommerce_tc4_validateCartAndTotal extends Setup{
 	HashSet<String> shoeNames = new HashSet<>();
 	float totalAmount = 0;
 
+	public static AndroidDriver<AndroidElement> driver;
+	static Ecommerce_FormPage eFP;
+
+	@BeforeClass
+	public void setPreRequisite() throws IOException, InterruptedException {
+		System.err.println("Ecome444444444444444444444444444444");
+		killAllProcess();
+		startService();
+		driver = capabilities("ECOMMERCE_TEST_APP","EMULATOR_PIXEL_3A_8");
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		eFP = new Ecommerce_FormPage(driver);
+		
+	}
+
 	@Test
 	public void testValidationCart() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
-		
-		startService();
-		AndroidDriver<AndroidElement> driver = capabilities("ECOMMERCE_TEST_APP","EMULATOR_PIXEL_3A_8");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		
-		Ecommerce_FormPage eFP = new Ecommerce_FormPage(driver);
+
 		
 		eFP.enterName("Nirav");
 	
