@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -75,7 +76,6 @@ public class Ecommerce_tc4_validateCartAndTotal extends Setup{
 		System.out.println("Total so far: "+ev.totalAmount);
 		ev.validateItemsInCart(ae, driver);
 		ev.validateTotalAmountInCart(ae, driver);
-		stopService();
 		
 		
 	}
@@ -168,6 +168,11 @@ public class Ecommerce_tc4_validateCartAndTotal extends Setup{
 		Assert.assertEquals(fPrice, totalAmount,0.00);
 		
 		
+	}
+	
+	@AfterClass
+	public void terminateProcesses() throws IOException, InterruptedException{
+		stopService();
 	}
 
 }

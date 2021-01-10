@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -12,6 +13,7 @@ import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
+import junit.framework.Assert;
 import pageobjects.HomePage;
 import pageobjects.PreferenceDependenciesPage;
 import pageobjects.PreferencePage;
@@ -38,14 +40,13 @@ public class APIDemoBasicTest extends Setup{
 		
 	}
 
-	@Test
+	@Test(groups = {"smoke","healthCheck"})
 	public void testBasicApiDemo() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 
 		
 		AndroidElement e;
 		hP.clickPreferenceMenu();
-		
 		
 		
 		e=  pP.DependeciesMenu;
@@ -66,6 +67,11 @@ public class APIDemoBasicTest extends Setup{
 		e = eL.get(1);
 		e.click();
 		
+		
+	}
+	
+	@AfterClass
+	public void terminateProcesses() throws IOException, InterruptedException{
 		stopService();
 	}
 

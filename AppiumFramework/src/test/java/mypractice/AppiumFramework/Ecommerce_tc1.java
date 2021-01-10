@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
@@ -29,7 +30,7 @@ public class Ecommerce_tc1 extends Setup{
 		
 	}
 
-	@Test
+	@Test(groups= {"healthCheck"})
 	public void testFormFill() throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		AndroidElement ae = driver.findElementById("com.androidsample.generalstore:id/nameField");
@@ -49,10 +50,15 @@ public class Ecommerce_tc1 extends Setup{
 		
 		ae = driver.findElementByXPath("//android.widget.Button[@text=\"Let's  Shop\"]");
 		ae.click();
-		Assert.assertTrue(true);
-		//driver.quit();
-		stopService();
 		
+		//driver.quit();
+		
+		
+	}
+	
+	@AfterClass
+	public void terminateProcesses() throws IOException, InterruptedException{
+		stopService();
 	}
 
 }
