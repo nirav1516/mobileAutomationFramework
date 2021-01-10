@@ -8,8 +8,13 @@ import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.net.PortProber;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -22,6 +27,7 @@ public class Setup {
 	
 	public static AppiumDriverLocalService service;
 	public static Properties prop;
+	public static AndroidDriver<AndroidElement> driver;
 	
 	public void startService() throws IOException {
 		//APPIUM_PORT
@@ -45,7 +51,12 @@ public class Setup {
 	
 	public void stopService() {
 		
-		if(service!=null)service.stop();
+		if(service!=null && service.isRunning()) {
+			System.out.println("Setup.stopService()-------------------------> Sercice Running, Trying to Stop");
+			service.stop();
+		}else {
+			System.out.println("Setup.stopService()-------------------------> Service Already stopped.");
+		}
 	}
 	
 	
@@ -68,7 +79,7 @@ public class Setup {
 		cap.setCapability(MobileCapabilityType.APP, apkPath.getAbsolutePath());
 		cap.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
 		cap.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, Integer.parseInt(prop.getProperty("APPIUM_TIMEOUT")));
-		AndroidDriver<AndroidElement> driver = new AndroidDriver<>(serverURL,cap);
+		driver = new AndroidDriver<>(serverURL,cap);
 		return driver;
 	}
 	
@@ -110,6 +121,25 @@ public class Setup {
 		Runtime.getRuntime().exec(pathToBatchFile);
 		Thread.sleep(8000);
 	}
+	
+	public static void getScreenShot(String testCaseName) throws IOException {
+		
+		  
+		File ssFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		StringBuilder sB = new StringBuilder();
+		sB.append("./test-output/screenshots/");
+		sB.append(testCaseName);
+		sB.append("_");
+		sB.append(System.currentTimeMillis());
+		sB.append(".png");
+		
+		String finalFilePath = sB.toString();
+		File outputFile = new File(finalFilePath);
+		System.out.println("Setup.getScreenShot()---------------------------->>>");
+		System.out.println(outputFile.getAbsolutePath());
+		FileUtils.copyFile(ssFile, outputFile);
+	}
+	
 	
 	
 
