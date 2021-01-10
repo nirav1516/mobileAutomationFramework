@@ -20,7 +20,8 @@ public class Listeners implements ITestListener{
 	//	ITestListener.super.onTestFailure(result);
 		String testCaseName = result.getName();
 		try {
-			Setup.getScreenShot(testCaseName);
+			String ssPAth = Setup.getScreenShot(testCaseName);
+			result.setAttribute("ssPath", ssPAth);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

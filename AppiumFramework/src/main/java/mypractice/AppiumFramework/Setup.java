@@ -122,7 +122,7 @@ public class Setup {
 		Thread.sleep(8000);
 	}
 	
-	public static void getScreenShot(String testCaseName) throws IOException {
+	public static String getScreenShot(String testCaseName) throws IOException {
 		
 		  
 		File ssFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
@@ -138,6 +138,7 @@ public class Setup {
 		System.out.println("Setup.getScreenShot()---------------------------->>>");
 		System.out.println(outputFile.getAbsolutePath());
 		FileUtils.copyFile(ssFile, outputFile);
+		return outputFile.getAbsolutePath();
 	}
 	
 	
