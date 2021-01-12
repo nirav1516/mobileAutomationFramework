@@ -1,5 +1,6 @@
 package utilities.resources;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -57,9 +58,9 @@ public class ExtentReporterNG implements IReporter {
                 test.getTest().endedTime = getTime(result.getEndMillis());*/
  
                 for (String group : result.getMethod().getGroups())
-                    test.assignCategory(group);
+                    test.assignCategory(group); 
  
-                String message = "Test " + status.toString().toLowerCase() + "ed at time in millis"+result.getEndMillis();
+                String message = "Test " + status.toString().toLowerCase() + "ed at time in millis: "+ new Timestamp(result.getEndMillis());
  
                 if (result.getThrowable() != null)
                     message = result.getThrowable().getMessage();
