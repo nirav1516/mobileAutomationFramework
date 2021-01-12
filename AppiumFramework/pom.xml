@@ -9,6 +9,56 @@
 
   <name>AppiumFramework</name>
   <url>http://maven.apache.org</url>
+  
+  
+  <profiles>
+  	<profile>
+  		<id>regression</id>
+  		<build>
+  			<resources>
+  				<resource>
+  					<directory>src/main/java/utilities/resources</directory>
+  					<filtering>true</filtering>
+  				</resource>
+  			</resources>
+		    <pluginManagement>
+		      <plugins>
+		        <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-surefire-plugin</artifactId>
+		        <version>3.0.0-M5</version>
+		        <configuration>
+		          <suiteXmlFiles>
+		            <suiteXmlFile>testng.xml</suiteXmlFile>
+		          </suiteXmlFiles>
+		        </configuration>
+		      </plugin>
+		      </plugins>
+		    </pluginManagement>
+		</build>	
+  	</profile>
+  	<profile>
+  		<id>smoke</id>
+  		<build>
+		    <pluginManagement>
+		      <plugins>
+		        <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-surefire-plugin</artifactId>
+		        <version>3.0.0-M5</version>
+		        <configuration>
+		          <suiteXmlFiles>
+		            <suiteXmlFile>testng2.xml</suiteXmlFile>
+		          </suiteXmlFiles>
+		        </configuration>
+		      </plugin>
+		      </plugins>
+		    </pluginManagement>
+		</build>	
+  	</profile>
+  </profiles>
+  
+  
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
