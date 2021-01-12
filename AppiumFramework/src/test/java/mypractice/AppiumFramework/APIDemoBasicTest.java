@@ -28,7 +28,7 @@ public class APIDemoBasicTest extends Setup{
 	
 	
 	
-	@BeforeClass
+	@BeforeMethod
 	public void setPreRequisite() throws IOException, InterruptedException {
 		System.err.println("APIDEMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 		killAllProcess();
