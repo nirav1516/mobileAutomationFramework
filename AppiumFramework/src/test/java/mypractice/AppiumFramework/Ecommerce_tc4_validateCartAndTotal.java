@@ -40,7 +40,7 @@ public class Ecommerce_tc4_validateCartAndTotal extends Setup{
 		System.err.println("Ecome444444444444444444444444444444");
 		killAllProcess();
 		startService();
-		driver = capabilities("ECOMMERCE_TEST_APP","EMULATOR_PIXEL_3A_8");
+		driver = capabilities("ECOMMERCE_TEST_APP");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		eFP = new Ecommerce_FormPage(driver);
 		

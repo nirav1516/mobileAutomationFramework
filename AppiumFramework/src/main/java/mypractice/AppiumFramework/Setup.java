@@ -61,7 +61,7 @@ public class Setup {
 	
 	
 	
-	public static AndroidDriver<AndroidElement> capabilities(String appName, String deviceName) throws IOException, InterruptedException {
+	public static AndroidDriver<AndroidElement> capabilities(String appName) throws IOException, InterruptedException {
 		System.out.println("Setup.capabilities()");
 		//System.err.println("Erorrrrrrrrrrrrrrrrrrrr");
 		// TODO Auto-generated method stub
@@ -70,6 +70,7 @@ public class Setup {
 		File apkPath = new File(srcPath,prop.getProperty(appName));
 		String serverPath = "http://127.0.0.1:4723/wd/hub";
 		URL serverURL = new URL(serverPath);
+		String deviceName = System.getProperty("deviceName");
 		System.out.println("Chcking if device is an emulator:...............>> "+deviceName.toLowerCase().contains("emulator"));
 		if(deviceName.toLowerCase().contains("emulator"))
 			startEmulator(prop.getProperty(deviceName));

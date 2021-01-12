@@ -33,7 +33,7 @@ public class APIDemoBasicTest extends Setup{
 		System.err.println("APIDEMOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 		killAllProcess();
 		startService();
-		driver = capabilities("DEMO_API_TEST_APP","EMULATOR_PIXEL_3A_8");
+		driver = capabilities("DEMO_API_TEST_APP");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		hP = new HomePage(driver);
 		pP = new PreferencePage(driver);
