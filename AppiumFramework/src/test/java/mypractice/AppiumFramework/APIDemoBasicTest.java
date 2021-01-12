@@ -9,6 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
@@ -40,8 +41,8 @@ public class APIDemoBasicTest extends Setup{
 		
 	}
 
-	@Test(groups = {"smoke","healthCheck"})
-	public void testBasicApiDemo() throws IOException, InterruptedException {
+	@Test(groups = {"smoke","healthCheck"},dataProvider = "inputData", dataProviderClass = TestData.class)
+	public void testBasicApiDemo(String userName,String passWord) throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 
 		
@@ -59,7 +60,7 @@ public class APIDemoBasicTest extends Setup{
 		e.click();
 		
 		e = pDP.wifiTextBox;//driver.findElement(By.className("android.widget.EditText"));
-		e.setValue("Nirav");
+		e.setValue(userName);
 		 
 		//e= driver.findElement(By.id("android:id/button1"));
 		
@@ -74,5 +75,7 @@ public class APIDemoBasicTest extends Setup{
 	public void terminateProcesses() throws IOException, InterruptedException{
 		stopService();
 	}
+	
+	
 
 }
